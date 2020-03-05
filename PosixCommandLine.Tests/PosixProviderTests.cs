@@ -1,15 +1,14 @@
 using System.Collections.Generic;
-using CommandlineMultiple.Tests;
 using FluentAssertions;
 using Microsoft.Extensions.Configuration;
 using Xunit;
 
 namespace PosixCommandline.Tests
 {
-    public static class UnitTest1
+    public static class PosixProviderTests
     {
         [Fact]
-        public static void Single()
+        public static void OptionArgument()
         {
             var builder = new ConfigurationBuilder()
                 .AddPosixCommandLine(new[] {"--single", "my-value"})
@@ -25,7 +24,7 @@ namespace PosixCommandline.Tests
         }
         
         [Fact]
-        public static void Flag()
+        public static void Option()
         {
             var builder = new ConfigurationBuilder()
                 .AddPosixCommandLine(new[] {"--flag"})
@@ -62,12 +61,12 @@ namespace PosixCommandline.Tests
         [Fact]
         public static void Short()
         {
-            var mappings = new Dictionary<string, string>
+            var aliases = new Dictionary<string, string>
             {
-                ["f"] = nameof(Options.Flag)
+                ["f"] = nameof(Tests.Options.Flag)
             };
             var builder = new ConfigurationBuilder()
-                .AddPosixCommandLine(new[] { "-f" }, mappings)
+                .AddPosixCommandLine(new[] { "-f" }, aliases)
                 .Build();
 
             var options = new Options();
@@ -82,12 +81,8 @@ namespace PosixCommandline.Tests
         [Fact]
         public static void Compound()
         {
-            var mappings = new Dictionary<string, string>
-            {
-                ["f"] = nameof(Options.Flag)
-            };
             var builder = new ConfigurationBuilder()
-                .AddPosixCommandLine(new[] { "--compound-word", "my-value" }, mappings)
+                .AddPosixCommandLine(new[] { "--compound-word", "my-value" })
                 .Build();
 
             var options = new Options();
@@ -100,15 +95,10 @@ namespace PosixCommandline.Tests
         }
         
         [Fact]
-        public static void Flags()
+        public static void Options()
         {
-            var mappings = new Dictionary<string, string>
-            {
-                ["a"] = nameof(Options.A),
-                ["b"] = nameof(Options.B)
-            };
             var builder = new ConfigurationBuilder()
-                .AddPosixCommandLine(new[] { "-ab" }, mappings)
+                .AddPosixCommandLine(new[] { "-ab" })
                 .Build();
 
             var options = new Options();
@@ -176,7 +166,7 @@ namespace PosixCommandline.Tests
         }
         
         [Fact]
-        public static void MultipleNested()
+        public static void NestedMultiple()
         {
             var args = new[] {"--options:multiple", "my-value-1", "--options:multiple", "my-value-2", "--options:multiple", "my-value-3"};
             var builder = new ConfigurationBuilder()
@@ -188,6 +178,44 @@ namespace PosixCommandline.Tests
 
             options
                 .Options
+                .Multiple
+                .Should()
+                .Equal("my-value-1", "my-value-2", "my-value-3");
+        }
+        
+        [Fact]
+        public static void NestedCompound()
+        {
+            var args = new[] {"--options:compound-word", "my-value"};
+            var builder = new ConfigurationBuilder()
+                .AddPosixCommandLine(args)
+                .Build();
+
+            var options = new Nested();
+            builder.Bind(options);
+
+            options
+                .Options
+                .CompoundWord
+                .Should()
+                .Be("my-value");
+        }
+        
+        [Fact]
+        public static void Operands()
+        {
+            var args = new[] {"my-value-1", "my-value-2", "my-value-3"};
+            var builder = new ConfigurationBuilder()
+                .AddPosixCommandLine(args, new Dictionary<string, string>
+                {
+                    [""] = nameof(Tests.Options.Multiple)
+                })
+                .Build();
+
+            var options = new Options();
+            builder.Bind(options);
+
+            options
                 .Multiple
                 .Should()
                 .Equal("my-value-1", "my-value-2", "my-value-3");
