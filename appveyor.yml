@@ -5,11 +5,15 @@ image: Ubuntu1804
 configuration: Release
 only_commits:
   files:
+    - appveyor.yml
     - CommandLiners/**/*
     - PosixCommandLine/**/*
     - MonoOptionsCommandLine/**/*
 environment:
-  CODECOV_TOKEN: 7b0a3c86-501a-43d0-8e16-ee996773a3ac
+  CODECOV_TOKEN: 705f45d2-d219-4cde-8182-d53bae7fb233
+  STRYKER_DASHBOARD_API_KEY:
+    secure: 7dBuQtP4/QgWdJ7PlawLjYGekTjb3NeCoHco5fmNRfwAhsv+aZCcJkJXHJAY+oYc
+  STRYKER_DASHBOARD_PROJECT: CommandLiners
 dotnet_csproj:
   patch: true
   file: '**\*.csproj'
@@ -23,6 +27,10 @@ build:
   verbosity: minimal
 after_test:
   - bash <(curl -s https://codecov.io/bash)
+  - dotnet tool install -g dotnet-stryker
+  - dotnet stryker --reporters "['dashboard']" -tp "['PosixCommandLine.Tests/PosixCommandLine.Tests.csproj']" --dashboard-module Posix
+  - dotnet stryker --reporters "['dashboard']" -tp "['MonoOptionsCommandLine.Tests/MonoOptionsCommandLine.Tests.csproj']" --dasboard-module Mono.Options
+  - dotnet stryker --reporters "['dashboard']" -tp "['CommandLiners.Tests/CommandLiners.Tests.csproj']" --dashboad-module CommandLiners
 deploy:
 - provider: NuGet
   api_key:
