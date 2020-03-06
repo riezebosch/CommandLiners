@@ -15,16 +15,14 @@ builder.Bind(options);
 ## Flag arguments
 
 ```c#
-var aliases = new Dictionary<string, string>
-{
-    ["d"] = nameof(Options.Debug),
-    ["l"] = nameof(Options.Log)
-};
+var aliases = new OptionMap<Options>()
+    .Add("d", o => o.Debug)
+    .Add("l", o => Options.Log);
 
 var args = new[] { "-dl" };
 
 var builder = new ConfigurationBuilder()
-    .AddPosixCommandLine(args, aliases)
+    .AddPosixCommandLine(args, aliases.Mappings)
     .Build();
 ```
 
@@ -33,10 +31,7 @@ var builder = new ConfigurationBuilder()
 ```c#
 var args = new[] {"my-value-1", "my-value-2", "my-value-3"};
 var builder = new ConfigurationBuilder()
-    .AddPosixCommandLine(args, new Dictionary<string, string>
-    {
-        [""] = nameof(Options.Files)
-    })
+    .AddPosixCommandLine(args, new OptionMap<Options>().MapOperands(o => o.Files))
     .Build();
 ```
 

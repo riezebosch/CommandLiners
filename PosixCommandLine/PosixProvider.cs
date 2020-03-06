@@ -8,9 +8,9 @@ namespace PosixCommandline
     internal class PosixProvider : ConfigurationProvider
     {
         private readonly IEnumerable<Option> _options;
-        private readonly Dictionary<string, string> _aliases;
+        private readonly IDictionary<string, string> _aliases;
 
-        public PosixProvider(IEnumerable<Option> options, Dictionary<string, string> aliases)
+        public PosixProvider(IEnumerable<Option> options, IDictionary<string, string> aliases)
         {
             _options = options;
             _aliases = aliases ?? new Dictionary<string, string>();
@@ -29,7 +29,7 @@ namespace PosixCommandline
             }
         }
 
-        private static string LookupKey(string key, IReadOnlyDictionary<string, string> aliases) =>
+        private static string LookupKey(string key, IDictionary<string, string> aliases) =>
             aliases.TryGetValue(key, out var alias) 
                 ? alias 
                 : key.Replace("-", "");
