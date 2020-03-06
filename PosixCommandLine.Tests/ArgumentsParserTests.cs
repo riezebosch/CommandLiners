@@ -1,3 +1,4 @@
+using System.Linq;
 using CommandLiners;
 using CommandLiners.Options;
 using FluentAssertions;

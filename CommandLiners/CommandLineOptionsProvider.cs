@@ -24,7 +24,7 @@ namespace CommandLiners
                 foreach (var o in option)
                 {
                     // Store everything as potential array
-                    Set($"{option.Key}:{count++}", o.ToString());
+                    Set($"{option.Key}:{count++}", o.Value);
                 }
             }
         }
