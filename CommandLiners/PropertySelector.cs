@@ -1,9 +1,9 @@
 using System;
 using System.Linq.Expressions;
 
-namespace PosixCommandline
+namespace CommandLiners
 {
-    internal static class PropertySelector
+    public static class PropertySelector
     {
         public static string Do(LambdaExpression map)
         {

@@ -1,8 +1,8 @@
 using System.Collections.Generic;
 using System.Linq;
-using PosixCommandline.Options;
+using CommandLiners.Options;
 
-namespace PosixCommandline
+namespace CommandLiners
 {
     public static class ArgumentsParser
     {

@@ -1,6 +1,7 @@
-using System.Collections.Generic;
+using CommandLiners;
 using FluentAssertions;
 using Microsoft.Extensions.Configuration;
+using PosixCommandline.Tests.Options;
 using Xunit;
 
 namespace PosixCommandline.Tests
@@ -14,7 +15,7 @@ namespace PosixCommandline.Tests
                 .AddPosixCommandLine(new[] {"--single", "my-value"})
                 .Build();
 
-            var options = new Options();
+            var options = new Simple();
             builder.Bind(options);
 
             options
@@ -30,7 +31,7 @@ namespace PosixCommandline.Tests
                 .AddPosixCommandLine(new[] {"--flag"})
                 .Build();
 
-            var options = new Options();
+            var options = new Simple();
             builder.Bind(options);
 
             options
@@ -46,12 +47,12 @@ namespace PosixCommandline.Tests
                 .AddPosixCommandLine(new[] {"--flag", "--single", "hello"})
                 .Build();
 
-            var options = new Options();
+            var options = new Simple();
             builder.Bind(options);
 
             options
                 .Should()
-                .BeEquivalentTo(new Options
+                .BeEquivalentTo(new Simple
                 {
                     Flag = true,
                     Single = "hello"
@@ -61,14 +62,14 @@ namespace PosixCommandline.Tests
         [Fact]
         public static void Short()
         {
-            var aliases = new OptionMap<Options>()
+            var aliases = new OptionMap<Simple>()
                 .Add("f", x => x.Flag); 
             
             var builder = new ConfigurationBuilder()
                 .AddPosixCommandLine(new[] { "-f" }, aliases.Mappings)
                 .Build();
 
-            var options = new Options();
+            var options = new Simple();
             builder.Bind(options);
 
             options
@@ -84,7 +85,7 @@ namespace PosixCommandline.Tests
                 .AddPosixCommandLine(new[] { "--compound-word", "my-value" })
                 .Build();
 
-            var options = new Options();
+            var options = new Simple();
             builder.Bind(options);
 
             options
@@ -100,12 +101,12 @@ namespace PosixCommandline.Tests
                 .AddPosixCommandLine(new[] { "-ab" })
                 .Build();
 
-            var options = new Options();
+            var options = new Simple();
             builder.Bind(options);
 
             options
                 .Should()
-                .BeEquivalentTo(new Options
+                .BeEquivalentTo(new Simple
                 {
                     A = true,
                     B = true
@@ -155,7 +156,7 @@ namespace PosixCommandline.Tests
                 .AddPosixCommandLine(args)
                 .Build();
 
-            var options = new Options();
+            var options = new Simple();
             builder.Bind(options);
 
             options
@@ -205,10 +206,10 @@ namespace PosixCommandline.Tests
         {
             var args = new[] {"my-value-1", "my-value-2", "my-value-3"};
             var builder = new ConfigurationBuilder()
-                .AddPosixCommandLine(args, new OptionMap<Options>().MapOperands(x => x.Multiple).Mappings)
+                .AddPosixCommandLine(args, new OptionMap<Simple>().MapOperands(x => x.Multiple).Mappings)
                 .Build();
 
-            var options = new Options();
+            var options = new Simple();
             builder.Bind(options);
 
             options
@@ -216,25 +217,5 @@ namespace PosixCommandline.Tests
                 .Should()
                 .Equal("my-value-1", "my-value-2", "my-value-3");
         }
-    }
-
-    public class Options
-    {
-        public bool A { get; set; }
-        public bool B { get; set; }
-        public string Single { get; set; }
-        public string[] Multiple { get; set; }
-        public bool Flag { get; set; }
-        public string CompoundWord { get; set; }
-    }
-
-    public class Triple
-    {
-        public Nested Nested { get; set; }
-    }
-
-    public class Nested
-    {
-        public Options Options { get; set; }
     }
 }

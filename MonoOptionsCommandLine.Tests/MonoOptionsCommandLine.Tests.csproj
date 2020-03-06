@@ -2,8 +2,7 @@
 
     <PropertyGroup>
         <TargetFramework>netcoreapp3.1</TargetFramework>
-    <IsPackable>false</IsPackable>
-    <RootNamespace>PosixCommandline.Tests</RootNamespace>
+        <IsPackable>false</IsPackable>
     </PropertyGroup>
 
     <ItemGroup>
@@ -16,7 +15,7 @@
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\PosixCommandLine\PosixCommandLine.csproj" />
+      <ProjectReference Include="..\MonoOptionsCommandLine\MonoOptionsCommandLine.csproj" />
     </ItemGroup>
 
 </Project>

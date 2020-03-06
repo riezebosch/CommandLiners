@@ -1,8 +1,9 @@
 using System;
+using CommandLiners.Tests.Options;
 using FluentAssertions;
 using Xunit;
 
-namespace PosixCommandline.Tests
+namespace CommandLiners.Tests
 {
     public static class OptionMapTests
     {
@@ -19,7 +20,7 @@ namespace PosixCommandline.Tests
         
         [Fact]
         public static void Property() =>
-            new OptionMap<Options>()
+            new OptionMap<Simple>()
                 .Add("f", options => options.A)
                 .Mappings
                 .Should()

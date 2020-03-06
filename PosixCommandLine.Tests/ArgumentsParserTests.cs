@@ -1,8 +1,6 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
+using CommandLiners;
+using CommandLiners.Options;
 using FluentAssertions;
-using PosixCommandline.Options;
 using Xunit;
 
 namespace PosixCommandline.Tests

@@ -1,16 +1,16 @@
 using System.Collections.Generic;
 using System.Linq;
+using CommandLiners.Options;
 using Microsoft.Extensions.Configuration;
-using PosixCommandline.Options;
 
-namespace PosixCommandline
+namespace CommandLiners
 {
-    internal class PosixProvider : ConfigurationProvider
+    public class CommandLineOptionsProvider : ConfigurationProvider
     {
         private readonly IEnumerable<Option> _options;
         private readonly IDictionary<string, string> _aliases;
 
-        public PosixProvider(IEnumerable<Option> options, IDictionary<string, string> aliases)
+        public CommandLineOptionsProvider(IEnumerable<Option> options, IDictionary<string, string> aliases)
         {
             _options = options;
             _aliases = aliases ?? new Dictionary<string, string>();

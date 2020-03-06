@@ -1,7 +1,18 @@
-# POSIX Command Line Provider
+# CommandLiners
 
-This is a drop-in replacement for the `CommandLineProvider` following the POSIX 
-guidelines for the command-line options of a program.
+This is an extensible replacement for the `CommandLineProvider` fixing the wacky multiple argument notation and
+bringing together some widely used command line parser and the modern extensible configuration world of dotnet core.
+
+The default command line provider:
+
+```c#
+var args = new[] { "--input-file:0", "my-value-1", "--input-file:1", "my-value-2", "--input-file:2", "my-value-3"};
+var builder = new ConfigurationBuilder()
+    .AddPosixCommandLine(args)
+    .Build();
+```
+
+## POSIX
 
 ```c#
 var builder = new ConfigurationBuilder()
@@ -12,51 +23,25 @@ var options = new Options();
 builder.Bind(options);
 ```
 
-## Flag arguments
+For details see: [README](PosixCommandLine/README.md)
+
+## Mono.Options
+
+The popular Getopt::Long-inspired option parsing library [Mono.Options](https://www.nuget.org/packages/Mono.Options) is integrated via the Map<TOptions> class: 
 
 ```c#
-var aliases = new OptionMap<Options>()
-    .Add("d", o => o.Debug)
-    .Add("l", o => Options.Log);
-
-var args = new[] { "-dl" };
+var map = new Map<YourOptions>();
+new OptionSet
+{
+    { "f|files=", data => map.Add(data, x => x.Files) }
+}.Parse(new[] {"--files", "foo", "-f", "other"});
 
 var builder = new ConfigurationBuilder()
-    .AddPosixCommandLine(args, aliases.Mappings)
+    .AddMonoOptions(map)
     .Build();
+
+var options = new YourOptions();
+builder.Bind(options);
 ```
 
-## Unnamed arguments
-
-```c#
-var args = new[] {"my-value-1", "my-value-2", "my-value-3"};
-var builder = new ConfigurationBuilder()
-    .AddPosixCommandLine(args, new OptionMap<Options>().MapOperands(o => o.Files))
-    .Build();
-```
-
-## Multiples
-
-Options can be repeated when the value accepts a list of inputs:
-
-```c#
-var args = new[] { "--input-file", "my-value-1", "--input-file", "my-value-2", "--input-file", "my-value-3"};
-var builder = new ConfigurationBuilder()
-    .AddPosixCommandLine(args)
-    .Build();
-```
-
-Opposed to the `CommandLineProvider`:
-
-```c#
-var args = new[] { "--input-file:0", "my-value-1", "--input-file:1", "my-value-2", "--input-file:2", "my-value-3"};
-var builder = new ConfigurationBuilder()
-    .AddPosixCommandLine(args)
-    .Build();
-```
-
-
-
-GNU documentation for [POSIX guidelines for the command-line options of a program](https://www.gnu.org/prep/standards/html_node/Command_002dLine-Interfaces.html) and 
-man pages for [getopt and getopt_long](http://man7.org/linux/man-pages/man3/getopt.3.html).
-
+Use the `OptionSet` as usual and map the options to properties with `Map<TOptions>.Add`.
