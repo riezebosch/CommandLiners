@@ -62,11 +62,11 @@ namespace PosixCommandline.Tests
         [Fact]
         public static void Short()
         {
-            var aliases = new OptionMap<Simple>()
+            var map = new Map<Simple>()
                 .Add("f", x => x.Flag); 
             
             var builder = new ConfigurationBuilder()
-                .AddPosixCommandLine(new[] { "-f" }, aliases.Mappings)
+                .AddPosixCommandLine(new[] { "-f" }, map)
                 .Build();
 
             var options = new Simple();
@@ -206,7 +206,7 @@ namespace PosixCommandline.Tests
         {
             var args = new[] {"my-value-1", "my-value-2", "my-value-3"};
             var builder = new ConfigurationBuilder()
-                .AddPosixCommandLine(args, new OptionMap<Simple>().MapOperands(x => x.Multiple).Mappings)
+                .AddPosixCommandLine(args, new Map<Simple>().Operands(x => x.Multiple))
                 .Build();
 
             var options = new Simple();

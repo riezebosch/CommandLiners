@@ -15,7 +15,7 @@ builder.Bind(options);
 ## Flag arguments
 
 ```c#
-var aliases = new OptionMap<Options>()
+var aliases = new Map<Options>()
     .Add("d", o => o.Debug)
     .Add("l", o => Options.Log);
 
@@ -31,7 +31,7 @@ var builder = new ConfigurationBuilder()
 ```c#
 var args = new[] {"my-value-1", "my-value-2", "my-value-3"};
 var builder = new ConfigurationBuilder()
-    .AddPosixCommandLine(args, new OptionMap<Options>().MapOperands(o => o.Files))
+    .AddPosixCommandLine(args, new Map<Options>().Operands(o => o.Files))
     .Build();
 ```
 

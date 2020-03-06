@@ -7,15 +7,10 @@ namespace CommandLiners
     public class CommandLineOptionsSource : IConfigurationSource
     {
         private readonly IEnumerable<Option> _args;
-        private readonly IDictionary<string, string> _aliases;
 
-        public CommandLineOptionsSource(IEnumerable<Option> args, IDictionary<string, string> aliases)
-        {
-            _args = args;
-            _aliases = aliases;
-        }
+        public CommandLineOptionsSource(IEnumerable<Option> args) => _args = args;
 
         public IConfigurationProvider Build(IConfigurationBuilder builder) => 
-            new CommandLineOptionsProvider(_args, _aliases);
+            new CommandLineOptionsProvider(_args);
     }
 }

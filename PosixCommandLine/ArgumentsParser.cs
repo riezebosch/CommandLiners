@@ -6,8 +6,10 @@ namespace CommandLiners
 {
     public static class ArgumentsParser
     {
-        public static IEnumerable<Option> ToOptions(this IEnumerable<string> args)
+        public static IEnumerable<Option> ToOptions(this IEnumerable<string> args, IDictionary<string, string> aliases = null)
         {
+            aliases ??= new Dictionary<string, string>();
+            
             var queue = new Queue<string>(args);
             while (queue.Any())
             {
@@ -33,6 +35,7 @@ namespace CommandLiners
 
                 foreach (var option in options)
                 {
+                    option.Name = aliases.TryGetValue(option.Name, out var name) ? name : option.Name.Replace("-", "");
                     yield return option;
                 }
             }

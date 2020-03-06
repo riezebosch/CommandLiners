@@ -1,4 +1,4 @@
-using System.Linq;
+using System.Collections.Generic;
 using CommandLiners;
 using CommandLiners.Options;
 using FluentAssertions;
@@ -13,28 +13,28 @@ namespace PosixCommandline.Tests
             new[]{"--my-value", "my-value"}
                 .ToOptions()
                 .Should()
-                .BeEquivalentTo(new OptionArgument("my-value", "my-value"));
+                .BeEquivalentTo(new OptionArgument("myvalue", "my-value"));
 
         [Fact]
         public static void LongInlineValue() =>
             new[]{"--my-value=my-value"}
                 .ToOptions()
                 .Should()
-                .BeEquivalentTo(new OptionArgument("my-value", "my-value"));
+                .BeEquivalentTo(new OptionArgument("myvalue", "my-value"));
 
         [Fact]
         public static void LongNoInline() =>
             new[]{"--=my-value"}
                 .ToOptions()
                 .Should()
-                .BeEquivalentTo(new Option("=my-value"));
+                .BeEquivalentTo(new Option("=myvalue"));
 
         [Fact]
         public static void Option() =>
             new[]{"--my-value"}
                 .ToOptions()
                 .Should()
-                .BeEquivalentTo(new Option("my-value"));
+                .BeEquivalentTo(new Option("myvalue"));
 
         [Fact]
         public static void Options() =>
@@ -42,8 +42,8 @@ namespace PosixCommandline.Tests
                 .ToOptions()
                 .Should()
                 .BeEquivalentTo(
-                    new Option("my-value"),
-                    new Option("my-other"));
+                    new Option("myvalue"),
+                    new Option("myother"));
 
         [Fact]
         public static void Short() =>
@@ -84,12 +84,19 @@ namespace PosixCommandline.Tests
                 .BeEquivalentTo(new Operand("abc"));
         
         [Fact]
-        public static void Delimter() =>
+        public static void Delimiter() =>
             new[]{"-a", "--", "-abc" }
                 .ToOptions()
                 .Should()
                 .BeEquivalentTo(
                     new Option("a"),
                     new Operand("-abc"));
+        
+        [Fact]
+        public static void Alias() =>
+            new[]{"-a", "my-value" }
+                .ToOptions(new Dictionary<string, string> { ["a"] = "my-value" })
+                .Should()
+                .BeEquivalentTo(new OptionArgument("my-value", "my-value"));
     }
 }

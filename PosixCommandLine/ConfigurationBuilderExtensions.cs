@@ -5,7 +5,10 @@ namespace CommandLiners
 {
     public static class ConfigurationBuilderExtensions
     {
-        public static IConfigurationBuilder AddPosixCommandLine(this IConfigurationBuilder builder, IEnumerable<string> args, IDictionary<string, string> aliases = null) =>
-            builder.Add(new CommandLineOptionsSource(args.ToOptions(), aliases));
+        public static IConfigurationBuilder AddPosixCommandLine(this IConfigurationBuilder builder, IEnumerable<string> args) =>
+            builder.Add(new CommandLineOptionsSource(args.ToOptions()));
+        
+        public static IConfigurationBuilder AddPosixCommandLine(this IConfigurationBuilder builder, IEnumerable<string> args, Map map) =>
+            builder.Add(new CommandLineOptionsSource(args.ToOptions(map.Mappings)));
     }
 }

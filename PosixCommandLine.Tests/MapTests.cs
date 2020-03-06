@@ -1,15 +1,16 @@
 using System;
-using CommandLiners.Tests.Options;
+using CommandLiners;
 using FluentAssertions;
+using PosixCommandline.Tests.Options;
 using Xunit;
 
-namespace CommandLiners.Tests
+namespace PosixCommandline.Tests
 {
-    public static class OptionMapTests
+    public static class MapTests
     {
         [Fact]
         public static void Nested() =>
-            new OptionMap<Triple>()
+            new Map<Triple>()
                 .Add("f", options => options.Nested.Options.A)
                 .Mappings
                 .Should()
@@ -20,7 +21,7 @@ namespace CommandLiners.Tests
         
         [Fact]
         public static void Property() =>
-            new OptionMap<Simple>()
+            new Map<Simple>()
                 .Add("f", options => options.A)
                 .Mappings
                 .Should()
@@ -31,7 +32,7 @@ namespace CommandLiners.Tests
 
         [Fact]
         public static void Method() =>
-            new OptionMap<int>()
+            new Map<int>()
                 .Invoking(m => m.Add("f", options => options.Equals(3)))
                 .Should()
                 .Throw<ArgumentException>();
