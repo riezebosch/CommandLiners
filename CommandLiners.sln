@@ -8,6 +8,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Items", "Items", "{F3D9CB2C
 ProjectSection(SolutionItems) = preProject
 	.gitignore = .gitignore
 	README.md = README.md
+	appveyor.yml = appveyor.yml
 EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MonoOptionsCommandLine", "MonoOptionsCommandLine\MonoOptionsCommandLine.csproj", "{7C5FB9AA-FF20-430B-89EA-6C7995AFD318}"

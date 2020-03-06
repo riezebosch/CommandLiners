@@ -13,4 +13,18 @@
     <ItemGroup>
       <ProjectReference Include="..\CommandLiners\CommandLiners.csproj" />
     </ItemGroup>
+
+    <PropertyGroup>
+        <Authors>Manuel Riezebosch</Authors>
+        <NeutralLanguage>en-US</NeutralLanguage>
+        <AssemblyTitle>CommandLiners.Posix</AssemblyTitle>
+        <PackageId>CommandLiners.Posix</PackageId>
+        <Description>Use POSIX style command line options and map to Microsoft configuration builders.</Description>
+        <PackageReadmeFile>README.md</PackageReadmeFile>
+        <PackageTags>commandline;options;configuration;posix</PackageTags>
+        <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
+        <RepositoryType>git</RepositoryType>
+        <RepositoryUrl>https://github.com/riezebosch/CommandLiners.git</RepositoryUrl>
+        <Version>0.0.1</Version>
+    </PropertyGroup>
 </Project>
