@@ -1,3 +1,9 @@
+[![Mutation testing badge](https://img.shields.io/endpoint?style=flat&url=https%3A%2F%2Fbadge-api.stryker-mutator.io%2Fgithub.com%2Friezebosch%2FCommandLiners%2Fmaster)](https://dashboard.stryker-mutator.io/reports/github.com/riezebosch/CommandLiners/master)
+[![codecov](https://codecov.io/gh/riezebosch/commandliners/branch/master/graph/badge.svg)](https://codecov.io/gh/riezebosch/commandliners)
+[![build status](https://ci.appveyor.com/api/projects/status/o6xaw74qx8nayfbc/branch/master?svg=true)](https://ci.appveyor.com/project/riezebosch/commandliners/branch/master)
+[![nuget](https://img.shields.io/nuget/v/CommandLiners.svg)](https://www.nuget.org/packages/CommandLiners/)
+
+
 # CommandLiners
 
 This is an extensible replacement for the `CommandLineProvider` fixing the wacky multiple argument notation and
