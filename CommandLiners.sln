@@ -11,10 +11,6 @@ ProjectSection(SolutionItems) = preProject
 	appveyor.yml = appveyor.yml
 EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MonoOptionsCommandLine", "MonoOptionsCommandLine\MonoOptionsCommandLine.csproj", "{7C5FB9AA-FF20-430B-89EA-6C7995AFD318}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MonoOptionsCommandLine.Tests", "MonoOptionsCommandLine.Tests\MonoOptionsCommandLine.Tests.csproj", "{B195579C-A93C-4288-A264-CD2DEE390A0B}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CommandLiners.Tests", "CommandLiners.Tests\CommandLiners.Tests.csproj", "{CF914FF1-EE98-4E00-AE3C-CAA3E874B99A}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CommandLiners", "CommandLiners\CommandLiners.csproj", "{C0DF8CE7-4522-47B0-9E3C-5328DAF91995}"
@@ -33,14 +29,6 @@ Global
 		{285A0E5E-3FD9-42B2-947B-35476732F250}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{285A0E5E-3FD9-42B2-947B-35476732F250}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{285A0E5E-3FD9-42B2-947B-35476732F250}.Release|Any CPU.Build.0 = Release|Any CPU
-		{7C5FB9AA-FF20-430B-89EA-6C7995AFD318}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{7C5FB9AA-FF20-430B-89EA-6C7995AFD318}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{7C5FB9AA-FF20-430B-89EA-6C7995AFD318}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{7C5FB9AA-FF20-430B-89EA-6C7995AFD318}.Release|Any CPU.Build.0 = Release|Any CPU
-		{B195579C-A93C-4288-A264-CD2DEE390A0B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{B195579C-A93C-4288-A264-CD2DEE390A0B}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{B195579C-A93C-4288-A264-CD2DEE390A0B}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{B195579C-A93C-4288-A264-CD2DEE390A0B}.Release|Any CPU.Build.0 = Release|Any CPU
 		{CF914FF1-EE98-4E00-AE3C-CAA3E874B99A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{CF914FF1-EE98-4E00-AE3C-CAA3E874B99A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CF914FF1-EE98-4E00-AE3C-CAA3E874B99A}.Release|Any CPU.ActiveCfg = Release|Any CPU

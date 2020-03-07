@@ -1,13 +1,13 @@
-using CommandLiners;
+using CommandLiners.Options;
+using CommandLiners.Tests.Options;
 using FluentAssertions;
 using Microsoft.Extensions.Configuration;
 using Mono.Options;
-using MonoOptionsCommandLine.Tests.Options;
 using Xunit;
 
-namespace MonoOptionsCommandLine.Tests
+namespace CommandLiners.Tests
 {
-    public static class ProviderTests
+    public static class MonoOptionsTests
     {
         [Fact]
         public static void Simple()
@@ -19,7 +19,7 @@ namespace MonoOptionsCommandLine.Tests
             }.Parse(new[] {"--files", "foo", "asdf"});
             
             var builder = new ConfigurationBuilder()
-                .AddMonoOptions(map)
+                .AddCommandLineOptions(map)
                 .Build();
 
             var options = new Simple();
@@ -41,7 +41,7 @@ namespace MonoOptionsCommandLine.Tests
             }.Parse(new[] {"--files", "foo", "-f", "other"});
             
             var builder = new ConfigurationBuilder()
-                .AddMonoOptions(map)
+                .AddCommandLineOptions(map)
                 .Build();
 
             var options = new Nested();
@@ -52,6 +52,21 @@ namespace MonoOptionsCommandLine.Tests
                 .Multiple
                 .Should()
                 .BeEquivalentTo("foo", "other");
+        }
+
+        [Fact]
+        public static void Map()
+        {
+            var map = new Map<Simple>();
+            new OptionSet
+            {
+                {"f|files=", data => map.Add(data, x => x.Multiple)}
+            }.Parse(new[] {"--files", "foo", "asdf"});
+
+            map
+                .Options
+                .Should()
+                .BeEquivalentTo(new OptionArgument("Multiple", "foo"));
         }
     }
 }

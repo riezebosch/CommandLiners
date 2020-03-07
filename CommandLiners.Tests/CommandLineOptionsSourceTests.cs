@@ -1,4 +1,5 @@
 using CommandLiners.Options;
+using CommandLiners.Tests.Options;
 using FluentAssertions;
 using Microsoft.Extensions.Configuration;
 using Xunit;
@@ -15,7 +16,7 @@ namespace CommandLiners.Tests
                 .Add(source)
                 .Build();
             
-            var options =  new Options();
+            var options =  new Simple();
             builder.Bind(options);
 
             options
@@ -23,11 +24,5 @@ namespace CommandLiners.Tests
                 .Should()
                 .BeEquivalentTo("1", "2");
         }
-
-        private class Options
-        {
-            public string[] Multiple { get; set; }
-        }
-
     }
 }

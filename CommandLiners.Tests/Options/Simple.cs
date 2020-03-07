@@ -1,4 +1,4 @@
-namespace MonoOptionsCommandLine.Tests.Options
+namespace CommandLiners.Tests.Options
 {
     public class Simple
     {
