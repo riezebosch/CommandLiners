@@ -8,7 +8,7 @@ The default command line provider:
 ```c#
 var args = new[] { "--input-file:0", "my-value-1", "--input-file:1", "my-value-2", "--input-file:2", "my-value-3"};
 var builder = new ConfigurationBuilder()
-    .AddPosixCommandLine(args)
+    .AddCommandLine(args)
     .Build();
 ```
 
@@ -16,7 +16,7 @@ var builder = new ConfigurationBuilder()
 
 ```c#
 var builder = new ConfigurationBuilder()
-    .AddPosixCommandLine(args)
+    .AddCommandLineOptions(args.ToPosix())
     .Build();
 
 var options = new Options();
@@ -34,10 +34,10 @@ var map = new Map<YourOptions>();
 new OptionSet
 {
     { "f|files=", data => map.Add(data, x => x.Files) }
-}.Parse(new[] {"--files", "foo", "-f", "other"});
+}.Parse(new[] { "--files", "foo", "-f", "other" });
 
 var builder = new ConfigurationBuilder()
-    .AddMonoOptions(map)
+    .AddCommandLineOptions(map)
     .Build();
 
 var options = new YourOptions();

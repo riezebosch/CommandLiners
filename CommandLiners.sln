@@ -1,8 +1,8 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PosixCommandLine.Tests", "PosixCommandLine.Tests\PosixCommandLine.Tests.csproj", "{92E765D5-C0E2-47FF-AE51-FBA8491594B6}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CommandLiners.Posix.Tests", "CommandLiners.Posix.Tests\CommandLiners.Posix.Tests.csproj", "{92E765D5-C0E2-47FF-AE51-FBA8491594B6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PosixCommandLine", "PosixCommandLine\PosixCommandLine.csproj", "{285A0E5E-3FD9-42B2-947B-35476732F250}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CommandLiners.Posix", "CommandLiners.Posix\CommandLiners.Posix.csproj", "{285A0E5E-3FD9-42B2-947B-35476732F250}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Items", "Items", "{F3D9CB2C-B7B6-48D0-B03E-3A8F528F3FD6}"
 ProjectSection(SolutionItems) = preProject
@@ -10,10 +10,6 @@ ProjectSection(SolutionItems) = preProject
 	README.md = README.md
 	appveyor.yml = appveyor.yml
 EndProjectSection
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MonoOptionsCommandLine", "MonoOptionsCommandLine\MonoOptionsCommandLine.csproj", "{7C5FB9AA-FF20-430B-89EA-6C7995AFD318}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MonoOptionsCommandLine.Tests", "MonoOptionsCommandLine.Tests\MonoOptionsCommandLine.Tests.csproj", "{B195579C-A93C-4288-A264-CD2DEE390A0B}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CommandLiners.Tests", "CommandLiners.Tests\CommandLiners.Tests.csproj", "{CF914FF1-EE98-4E00-AE3C-CAA3E874B99A}"
 EndProject
@@ -33,14 +29,6 @@ Global
 		{285A0E5E-3FD9-42B2-947B-35476732F250}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{285A0E5E-3FD9-42B2-947B-35476732F250}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{285A0E5E-3FD9-42B2-947B-35476732F250}.Release|Any CPU.Build.0 = Release|Any CPU
-		{7C5FB9AA-FF20-430B-89EA-6C7995AFD318}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{7C5FB9AA-FF20-430B-89EA-6C7995AFD318}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{7C5FB9AA-FF20-430B-89EA-6C7995AFD318}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{7C5FB9AA-FF20-430B-89EA-6C7995AFD318}.Release|Any CPU.Build.0 = Release|Any CPU
-		{B195579C-A93C-4288-A264-CD2DEE390A0B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{B195579C-A93C-4288-A264-CD2DEE390A0B}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{B195579C-A93C-4288-A264-CD2DEE390A0B}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{B195579C-A93C-4288-A264-CD2DEE390A0B}.Release|Any CPU.Build.0 = Release|Any CPU
 		{CF914FF1-EE98-4E00-AE3C-CAA3E874B99A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{CF914FF1-EE98-4E00-AE3C-CAA3E874B99A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CF914FF1-EE98-4E00-AE3C-CAA3E874B99A}.Release|Any CPU.ActiveCfg = Release|Any CPU

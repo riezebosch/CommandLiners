@@ -5,7 +5,7 @@ guidelines for the command-line options of a program.
 
 ```c#
 var builder = new ConfigurationBuilder()
-    .AddPosixCommandLine(args)
+    .AddCommandLineOptions(args.ToPosix())
     .Build();
 
 var options = new Options();
@@ -15,14 +15,12 @@ builder.Bind(options);
 ## Flag arguments
 
 ```c#
-var aliases = new Map<Options>()
-    .Add("d", o => o.Debug)
-    .Add("l", o => Options.Log);
-
 var args = new[] { "-dl" };
 
 var builder = new ConfigurationBuilder()
-    .AddPosixCommandLine(args, aliases.Mappings)
+    .AddCommandLineOptions(args.ToPosix(map => map
+        .Add("d", o => o.Debug)
+        .Add("l", o => Options.Log)));
     .Build();
 ```
 
@@ -31,7 +29,7 @@ var builder = new ConfigurationBuilder()
 ```c#
 var args = new[] {"my-value-1", "my-value-2", "my-value-3"};
 var builder = new ConfigurationBuilder()
-    .AddPosixCommandLine(args, new Map<Options>().Operands(o => o.Files))
+    .AddCommandLineOptions(args.ToPosix(map => map.Operands(o => o.Files)))
     .Build();
 ```
 
@@ -42,7 +40,7 @@ Options can be repeated when the value accepts a list of inputs:
 ```c#
 var args = new[] { "--input-file", "my-value-1", "--input-file", "my-value-2", "--input-file", "my-value-3"};
 var builder = new ConfigurationBuilder()
-    .AddPosixCommandLine(args)
+    .AddCommandLineOptions(args.ToPosix())
     .Build();
 ```
 
@@ -51,7 +49,7 @@ Opposed to the `CommandLineProvider`:
 ```c#
 var args = new[] { "--input-file:0", "my-value-1", "--input-file:1", "my-value-2", "--input-file:2", "my-value-3"};
 var builder = new ConfigurationBuilder()
-    .AddPosixCommandLine(args)
+    .AddCommandLine(args)
     .Build();
 ```
 

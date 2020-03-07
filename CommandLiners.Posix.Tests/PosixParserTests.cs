@@ -1,45 +1,40 @@
-using System.Collections.Generic;
 using CommandLiners;
 using CommandLiners.Options;
 using FluentAssertions;
+using PosixCommandline.Tests.Options;
 using Xunit;
 
 namespace PosixCommandline.Tests
 {
-    public static class ArgumentsParserTests
+    public static class PosixParserTests
     {
         [Fact]
         public static void LongValue() =>
-            new[]{"--my-value", "my-value"}
-                .ToOptions()
+            new[]{"--my-value", "my-value"}.ToPosix()
                 .Should()
                 .BeEquivalentTo(new OptionArgument("myvalue", "my-value"));
 
         [Fact]
         public static void LongInlineValue() =>
-            new[]{"--my-value=my-value"}
-                .ToOptions()
+            new[]{"--my-value=my-value"}.ToPosix()
                 .Should()
                 .BeEquivalentTo(new OptionArgument("myvalue", "my-value"));
 
         [Fact]
         public static void LongNoInline() =>
-            new[]{"--=my-value"}
-                .ToOptions()
+            new[]{"--=my-value"}.ToPosix()
                 .Should()
                 .BeEquivalentTo(new Option("=myvalue"));
 
         [Fact]
         public static void Option() =>
-            new[]{"--my-value"}
-                .ToOptions()
+            new[]{"--my-value"}.ToPosix()
                 .Should()
                 .BeEquivalentTo(new Option("myvalue"));
 
         [Fact]
         public static void Options() =>
-            new[]{"--my-value", "--my-other"}
-                .ToOptions()
+            new[]{"--my-value", "--my-other"}.ToPosix()
                 .Should()
                 .BeEquivalentTo(
                     new Option("myvalue"),
@@ -47,15 +42,13 @@ namespace PosixCommandline.Tests
 
         [Fact]
         public static void Short() =>
-            new[]{"-m", "my-value"}
-                .ToOptions()
+            new[]{"-m", "my-value"}.ToPosix()
                 .Should()
                 .BeEquivalentTo(new OptionArgument("m", "my-value"));
 
         [Fact]
         public static void Shorts() =>
-            new[]{"-mabc" }
-                .ToOptions()
+            new[]{"-mabc" }.ToPosix()
                 .Should()
                 .BeEquivalentTo(
                     new Option("m"),
@@ -66,8 +59,7 @@ namespace PosixCommandline.Tests
 
         [Fact]
         public static void Combined() =>
-            new[]{"-abc", "--d" }
-                .ToOptions()
+            new[]{"-abc", "--d" }.ToPosix()
                 .Should()
                 .BeEquivalentTo(
                     new Option("a"),
@@ -78,15 +70,13 @@ namespace PosixCommandline.Tests
 
         [Fact]
         public static void No() =>
-            new[]{"abc" }
-                .ToOptions()
+            new[]{"abc" }.ToPosix()
                 .Should()
                 .BeEquivalentTo(new Operand("abc"));
         
         [Fact]
         public static void Delimiter() =>
-            new[]{"-a", "--", "-abc" }
-                .ToOptions()
+            new[]{"-a", "--", "-abc" }.ToPosix()
                 .Should()
                 .BeEquivalentTo(
                     new Option("a"),
@@ -94,9 +84,8 @@ namespace PosixCommandline.Tests
         
         [Fact]
         public static void Alias() =>
-            new[]{"-a", "my-value" }
-                .ToOptions(new Dictionary<string, string> { ["a"] = "my-value" })
+            new[] {"-a", "my-value"}.ToPosix<Simple>(map => map.Add("a", x => x.Flag))
                 .Should()
-                .BeEquivalentTo(new OptionArgument("my-value", "my-value"));
+                .BeEquivalentTo(new OptionArgument("Flag", "my-value"));
     }
 }

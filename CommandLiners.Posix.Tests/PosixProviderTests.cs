@@ -11,8 +11,9 @@ namespace PosixCommandline.Tests
         [Fact]
         public static void OptionArgument()
         {
+            var args = new[] {"--single", "my-value"};
             var builder = new ConfigurationBuilder()
-                .AddPosixCommandLine(new[] {"--single", "my-value"})
+                .AddCommandLineOptions(args.ToPosix())
                 .Build();
 
             var options = new Simple();
@@ -27,8 +28,9 @@ namespace PosixCommandline.Tests
         [Fact]
         public static void Option()
         {
+            var args = new[] {"--flag"};
             var builder = new ConfigurationBuilder()
-                .AddPosixCommandLine(new[] {"--flag"})
+                .AddCommandLineOptions(args.ToPosix())
                 .Build();
 
             var options = new Simple();
@@ -43,8 +45,9 @@ namespace PosixCommandline.Tests
         [Fact]
         public static void Combined()
         {
+            var args = new[] {"--flag", "--single", "hello"};
             var builder = new ConfigurationBuilder()
-                .AddPosixCommandLine(new[] {"--flag", "--single", "hello"})
+                .AddCommandLineOptions(args.ToPosix())
                 .Build();
 
             var options = new Simple();
@@ -62,11 +65,8 @@ namespace PosixCommandline.Tests
         [Fact]
         public static void Short()
         {
-            var map = new Map<Simple>()
-                .Add("f", x => x.Flag); 
-            
             var builder = new ConfigurationBuilder()
-                .AddPosixCommandLine(new[] { "-f" }, map)
+                .AddCommandLineOptions(new[] { "-f" }.ToPosix<Simple>(map => map.Add("f", x => x.Flag)))
                 .Build();
 
             var options = new Simple();
@@ -81,8 +81,9 @@ namespace PosixCommandline.Tests
         [Fact]
         public static void Compound()
         {
+            var args = new[] { "--compound-word", "my-value" };
             var builder = new ConfigurationBuilder()
-                .AddPosixCommandLine(new[] { "--compound-word", "my-value" })
+                .AddCommandLineOptions(args.ToPosix())
                 .Build();
 
             var options = new Simple();
@@ -97,8 +98,9 @@ namespace PosixCommandline.Tests
         [Fact]
         public static void Options()
         {
+            var args = new[] { "-ab" };
             var builder = new ConfigurationBuilder()
-                .AddPosixCommandLine(new[] { "-ab" })
+                .AddCommandLineOptions(args.ToPosix())
                 .Build();
 
             var options = new Simple();
@@ -116,8 +118,9 @@ namespace PosixCommandline.Tests
         [Fact]
         public static void Nested()
         {
+            var args = new[] {"--options:single", "my-value"};
             var builder = new ConfigurationBuilder()
-                .AddPosixCommandLine(new[] {"--options:single", "my-value"})
+                .AddCommandLineOptions(args.ToPosix())
                 .Build();
 
             var options = new Nested();
@@ -133,8 +136,9 @@ namespace PosixCommandline.Tests
         [Fact]
         public static void Triple()
         {
+            var args = new[] {"--nested:options:single", "my-value"};
             var builder = new ConfigurationBuilder()
-                .AddPosixCommandLine(new[] {"--nested:options:single", "my-value"})
+                .AddCommandLineOptions(args.ToPosix())
                 .Build();
 
             var options = new Triple();
@@ -153,7 +157,7 @@ namespace PosixCommandline.Tests
         {
             var args = new[] {"--multiple", "my-value-1", "--multiple", "my-value-2"};
             var builder = new ConfigurationBuilder()
-                .AddPosixCommandLine(args)
+                .AddCommandLineOptions(args.ToPosix())
                 .Build();
 
             var options = new Simple();
@@ -170,7 +174,7 @@ namespace PosixCommandline.Tests
         {
             var args = new[] {"--options:multiple", "my-value-1", "--options:multiple", "my-value-2", "--options:multiple", "my-value-3"};
             var builder = new ConfigurationBuilder()
-                .AddPosixCommandLine(args)
+                .AddCommandLineOptions(args.ToPosix())
                 .Build();
 
             var options = new Nested();
@@ -188,7 +192,7 @@ namespace PosixCommandline.Tests
         {
             var args = new[] {"--options:compound-word", "my-value"};
             var builder = new ConfigurationBuilder()
-                .AddPosixCommandLine(args)
+                .AddCommandLineOptions(args.ToPosix())
                 .Build();
 
             var options = new Nested();
@@ -206,7 +210,7 @@ namespace PosixCommandline.Tests
         {
             var args = new[] {"my-value-1", "my-value-2", "my-value-3"};
             var builder = new ConfigurationBuilder()
-                .AddPosixCommandLine(args, new Map<Simple>().Operands(x => x.Multiple))
+                .AddCommandLineOptions(args.ToPosix<Simple>(map => map.Operands(x => x.Multiple)))
                 .Build();
 
             var options = new Simple();
