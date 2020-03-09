@@ -9,9 +9,29 @@
 An extensible replacement for the default `CommandLineProvider` fixing the wacky multiple argument notation and
 opening up the integration for some widely used command-line parser with the modern extensible configuration world of dotnet core.
 
+## CommandlineUtils
+
+[CommandLineUtils](https://www.nuget.org/packages/McMaster.Extensions.CommandLineUtils)
+
+```c#
+var map = new MapOptions<YourOptions>();
+var app = new CommandLineApplication();
+
+app.Argument("files", "Input files", true)
+    .Map(map, to => to.Multiple);
+
+var result = app.Parse("input1.txt", "input2.txt");
+var builder = new ConfigurationBuilder()
+    .AddCommandLineOptions(map.FromCommand(result.SelectedCommand))
+    .Build();
+
+var options = new YourOptions();
+builder.Bind(options);
+```
+
 ## Mono.Options
 
-To integrate the popular [Mono.Options](https://www.nuget.org/packages/Mono.Options) library into the configuration providers world with the Map<TOptions> class, map options to properties, do the parsing, and load the results into the builder.
+To integrate [Mono.Options](https://www.nuget.org/packages/Mono.Options) library into the configuration providers world with the Map<TOptions> class, map options to properties, do the parsing, and load the results into the builder.
 
 ```c#
 var map = new Map<YourOptions>();
