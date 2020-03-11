@@ -1,0 +1,6 @@
+{
+  "single": "my-value",
+  "options": {
+    "single": "nested-value"
+  }
+}

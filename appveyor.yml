@@ -27,8 +27,10 @@ build:
 after_test:
   - bash <(curl -s https://codecov.io/bash)
   - dotnet tool install -g dotnet-stryker
-  - dotnet stryker --reporters "['dashboard']" -tp "['CommandLiners.Tests/CommandLiners.Tests.csproj']" --project-file "CommandLiners/CommandLiners.csproj" --dashboard-module CommandLiners --dashboard-project github.com/riezebosch/CommandLiners/master
-  - dotnet stryker --reporters "['dashboard']" -tp "['CommandLiners.Posix.Tests/CommandLiners.Posix.Tests.csproj']" --project-file "CommandLiners.Posix/CommandLiners.Posix.csproj" --dashboard-module Posix --dashboard-project github.com/riezebosch/CommandLiners/master
+  - dotnet stryker --reporters "['dashboard']" --dashboard-project github.com/riezebosch/CommandLiners/master --dashboard-module CommandLiners -tp "['CommandLiners.Tests/CommandLiners.Tests.csproj']" 
+  - dotnet stryker --reporters "['dashboard']" --dashboard-project github.com/riezebosch/CommandLiners/master --dashboard-module CommandLiners.Posix -tp "['CommandLiners.Posix.Tests/CommandLiners.Posix.Tests.csproj']" --project-file CommandLiners.Posix/CommandLiners.Posix.csproj
+  - dotnet stryker --reporters "['dashboard']" --dashboard-project github.com/riezebosch/CommandLiners/master --dashboard-module CommandLiners.CommandLineUtils -tp "['CommandLiners.CommandLineUtils.Tests/CommandLiners.CommandLineUtils.Tests.csproj']" --project-file CommandLiners.CommandLineUtils/CommandLiners.CommandLineUtils.csproj
+  - dotnet stryker --reporters "['dashboard']" --dashboard-project github.com/riezebosch/CommandLiners/master --dashboard-module CommandLiners.MonoOptions -tp "['CommandLiners.MonoOptions.Tests/CommandLiners.MonoOptions.Tests.csproj']" --project-file CommandLiners.MonoOptions/CommandLiners.MonoOptions.csproj
 deploy:
 - provider: NuGet
   api_key:

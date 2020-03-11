@@ -9,9 +9,9 @@
 An extensible replacement for the default `CommandLineProvider` fixing the wacky multiple argument notation and
 opening up the integration for some widely used command-line parser with the modern extensible configuration world of dotnet core.
 
-## CommandlineUtils
+## CommandLineUtils [![CommandLineUtils](https://img.shields.io/nuget/dt/McMaster.Extensions.CommandLineUtils.svg)](https://www.nuget.org/packages/McMaster.Extensions.CommandLineUtils) 
 
-[CommandLineUtils](https://www.nuget.org/packages/McMaster.Extensions.CommandLineUtils)
+To integrate [CommandLineUtils](https://www.nuget.org/packages/CommandLiners.CommandLineUtils) library into the configuration providers world with the Map<TOptions> class, map options to properties, do the parsing, and load the results into the builder.
 
 ```c#
 var map = new MapOptions<YourOptions>();
@@ -29,9 +29,9 @@ var options = new YourOptions();
 builder.Bind(options);
 ```
 
-## Mono.Options
+## Mono.Options [![Mono.Options](https://img.shields.io/nuget/dt/Mono.Options.svg)](https://www.nuget.org/packages/Mono.Options)
 
-To integrate [Mono.Options](https://www.nuget.org/packages/Mono.Options) library into the configuration providers world with the Map<TOptions> class, map options to properties, do the parsing, and load the results into the builder.
+To integrate [Mono.Options](https://www.nuget.org/packages/CommandLiners.MonoOptions) library into the configuration providers world with the Map<TOptions> class, map options to properties, do the parsing, and load the results into the builder.
 
 ```c#
 var map = new Map<YourOptions>();
@@ -50,7 +50,7 @@ builder.Bind(options);
 
 `Mono.Options` has the additional benefits of providing feedback on the usage of options and having a battle-tested notation for flags. 
 
-## POSIX
+## POSIX [![CommandLiners.Posix](https://img.shields.io/nuget/dt/CommandLiners.Posix.svg)](https://www.nuget.org/packages/CommandLiners.Posix)
 
 While building this configuration provider, I first included my own arguments parser to find out later that with some little refactoring, I could open up for extensibility. The parser is now in a separate package.
 
@@ -82,4 +82,6 @@ var builder = new ConfigurationBuilder()
 ```
 
 It turned out to be impossible to hook into its parsing process and after fiddling around
-I discovered that there wasn't much needed to build a custom configuration provider altogether. 
+I discovered that there wasn't much needed to build a custom configuration provider altogether.
+
+Read more about this story [here](https://medium.com/@MRiezebosch/integrate-command-line-parsers-into-dotnet-core-configuration-providers-9b5f5d1af672). 
