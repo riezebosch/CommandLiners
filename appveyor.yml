@@ -25,15 +25,4 @@ build:
   publish_nuget: true
   verbosity: minimal
 after_test:
-  - bash <(curl -s https://codecov.io/bash)
-  - dotnet tool install -g dotnet-stryker
-  - dotnet stryker --reporters "['dashboard']" --dashboard-project github.com/riezebosch/CommandLiners/master --dashboard-module CommandLiners -tp "['CommandLiners.Tests/CommandLiners.Tests.csproj']" 
-  - dotnet stryker --reporters "['dashboard']" --dashboard-project github.com/riezebosch/CommandLiners/master --dashboard-module CommandLiners.Posix -tp "['CommandLiners.Posix.Tests/CommandLiners.Posix.Tests.csproj']" --project-file CommandLiners.Posix/CommandLiners.Posix.csproj
-  - dotnet stryker --reporters "['dashboard']" --dashboard-project github.com/riezebosch/CommandLiners/master --dashboard-module CommandLiners.CommandLineUtils -tp "['CommandLiners.CommandLineUtils.Tests/CommandLiners.CommandLineUtils.Tests.csproj']" --project-file CommandLiners.CommandLineUtils/CommandLiners.CommandLineUtils.csproj
-  - dotnet stryker --reporters "['dashboard']" --dashboard-project github.com/riezebosch/CommandLiners/master --dashboard-module CommandLiners.MonoOptions -tp "['CommandLiners.MonoOptions.Tests/CommandLiners.MonoOptions.Tests.csproj']" --project-file CommandLiners.MonoOptions/CommandLiners.MonoOptions.csproj
-deploy:
-- provider: NuGet
-  api_key:
-    secure: JzBmBwf9nOxIvQ2bmLFJEVfH+vjRcLDERSc2enRfSjOo6/PvhC8nx6EJF8kCHarY
-  on:
-    branch: master
+  - 'curl -X DELETE https://dashboard.stryker-mutator.io/api/reports/github.com/riezebosch/CommandLiners/master -H "Host: dashboard.stryker-mutator.io" -H "X-Api-Key $STRYKER_DASHBOARD_API_KEY"'
