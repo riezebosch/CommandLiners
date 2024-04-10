@@ -5,3 +5,5 @@ obj/
 coverage.opencover.xml
 StrykerOutput/
 reports/
+*.user
+TestResults/

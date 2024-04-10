@@ -20,7 +20,7 @@ build:
   publish_nuget: true
   verbosity: minimal
 after_test:
-  - bash <(curl -s https://codecov.io/bash)
+  - curl -Os https://uploader.codecov.io/latest/linux/codecov && chmod +x codecov && ./codecov -t ${CODECOV_TOKEN} -f **/*.cobertura.xml
   - dotnet tool restore && dotnet stryker --reporter dots --reporter dashboard --dashboard-api-key $STRYKER_DASHBOARD_API_KEY
 deploy:
 - provider: NuGet
