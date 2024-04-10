@@ -3,11 +3,6 @@ pull_requests:
   do_not_increment_build_number: true
 image: Ubuntu1804
 configuration: Release
-only_commits:
-  files:
-    - appveyor.yml
-    - CommandLiners/**/*
-    - CommandLiners.Posix/**/*
 environment:
   CODECOV_TOKEN: 705f45d2-d219-4cde-8182-d53bae7fb233
   STRYKER_DASHBOARD_API_KEY:
@@ -26,11 +21,7 @@ build:
   verbosity: minimal
 after_test:
   - bash <(curl -s https://codecov.io/bash)
-  - dotnet tool install -g dotnet-stryker
-  - dotnet stryker --reporters "['dashboard']" --dashboard-project github.com/riezebosch/CommandLiners/master --dashboard-module CommandLiners -tp "['CommandLiners.Tests/CommandLiners.Tests.csproj']" 
-  - dotnet stryker --reporters "['dashboard']" --dashboard-project github.com/riezebosch/CommandLiners/master --dashboard-module CommandLiners.Posix -tp "['CommandLiners.Posix.Tests/CommandLiners.Posix.Tests.csproj']" --project-file CommandLiners.Posix/CommandLiners.Posix.csproj
-  - dotnet stryker --reporters "['dashboard']" --dashboard-project github.com/riezebosch/CommandLiners/master --dashboard-module CommandLiners.CommandLineUtils -tp "['CommandLiners.CommandLineUtils.Tests/CommandLiners.CommandLineUtils.Tests.csproj']" --project-file CommandLiners.CommandLineUtils/CommandLiners.CommandLineUtils.csproj
-  - dotnet stryker --reporters "['dashboard']" --dashboard-project github.com/riezebosch/CommandLiners/master --dashboard-module CommandLiners.MonoOptions -tp "['CommandLiners.MonoOptions.Tests/CommandLiners.MonoOptions.Tests.csproj']" --project-file CommandLiners.MonoOptions/CommandLiners.MonoOptions.csproj
+  - dotnet tool restore && dotnet stryker --reporter dots --reporter dashboard --dashboard-api-key $STRYKER_DASHBOARD_API_KEY
 deploy:
 - provider: NuGet
   api_key:
