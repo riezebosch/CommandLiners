@@ -1,7 +1,7 @@
 version: 1.0.{build}
 pull_requests:
   do_not_increment_build_number: true
-image: Ubuntu1804
+image: Ubuntu2204
 configuration: Release
 environment:
   CODECOV_TOKEN: 705f45d2-d219-4cde-8182-d53bae7fb233
