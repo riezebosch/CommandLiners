@@ -31,7 +31,7 @@ namespace CommandLiners
             var name = ToName(option);
             return option.OptionType switch
             {
-                CommandOptionType.NoValue => new[] { new Option(name) },
+                CommandOptionType.NoValue => option.Values.Select(_ => new Option(name)),
                 CommandOptionType.SingleOrNoValue => option.HasValue() ? new[] {  ToOptionalArgument(option, name) } : Enumerable.Empty<Option>(),
                 _ => option.Values.Select(value => new OptionArgument(name, value))
             };

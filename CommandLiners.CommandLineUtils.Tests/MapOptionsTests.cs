@@ -1,3 +1,4 @@
+using System.IO;
 using FluentAssertions;
 using McMaster.Extensions.CommandLineUtils;
 using Microsoft.Extensions.Configuration;
@@ -82,6 +83,31 @@ namespace CommandLiners.Tests.CommandLineUtils
                 .BeEquivalentTo(new Simple
                 {
                     Debug =  true
+                });
+        }
+        
+        [Fact]
+        public void NoValue()
+        {
+            var map = new MapOptions<Simple>();
+
+            var app = new CommandLineApplication();
+            app.Option("-d|--debug", "flag", CommandOptionType.NoValue)
+                .Map(map, to => to.Debug);
+
+            var result = app.Parse();
+            var builder = new ConfigurationBuilder()
+                .AddCommandLineOptions(map.FromCommand(result.SelectedCommand))
+                .Build();
+
+            var options = new Simple();
+            builder.Bind(options);
+
+            options
+                .Should()
+                .BeEquivalentTo(new Simple
+                {
+                    Debug =  false
                 });
         }
         
