@@ -9,6 +9,10 @@
       <PackageReference Include="Microsoft.Extensions.Configuration" Version="3.1.2" />
     </ItemGroup>
 
+    <ItemGroup>
+        <None Include="..\README.md" Pack="true" PackagePath="" />
+    </ItemGroup>
+    
     <PropertyGroup>
         <Authors>Manuel Riezebosch</Authors>
         <NeutralLanguage>en-US</NeutralLanguage>
